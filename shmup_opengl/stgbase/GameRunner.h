@@ -5,6 +5,7 @@
 #include <GL/freeglut.h>
 #include <GL/GL.h>
 #include "DataManager.h"
+#include "Renderer.h"
 
 namespace stgbase{
 

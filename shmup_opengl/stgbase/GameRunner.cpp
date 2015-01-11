@@ -9,6 +9,7 @@ using namespace stgbase;
 //used to wrap a pointer to member function renderCallback()
 GameRunner* gameRunnerRenderCallbackObj = nullptr;
 GLuint tex;
+GLuint bg;
 
 //
 //  Initialize and run the game
@@ -32,18 +33,8 @@ GameRunner::GameRunner(int argc, char** argv)
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    //temp
-    //create test checker image
     tex = DataManager::reloadTexture("res/player.png");
-    //tex = loadPNG2("res/player.png");
-
-
-
-    //upload to GPU texture
-    std::cout << tex << std::endl;
-
-
-
+    bg = DataManager::reloadTexture("res/background.png");
 
     glutMainLoop();
 }
@@ -67,21 +58,9 @@ void GameRunner::update(float elapsedTime)
 //
 void GameRunner::draw(float elapsedTime)
 {
-
-
-    //clear and draw quad with texture (could be in display callback)
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glBindTexture(GL_TEXTURE_2D, tex);
-    glEnable(GL_TEXTURE_2D);
-    glBegin(GL_QUADS);
-    glTexCoord2i(0, 0); glVertex2i(100, 100);
-    glTexCoord2i(0, 1); glVertex2i(100, 500);
-    glTexCoord2i(1, 1); glVertex2i(500, 500);
-    glTexCoord2i(1, 0); glVertex2i(500, 100);
-    glEnd();
-    glDisable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    Renderer::drawTex(bg, glm::vec2(0, 0), glm::vec2(this->windowWidth_, this->windowHeight_));
+    Renderer::drawTex(tex, glm::vec2(100, 100), glm::vec2(128, 128), 0.5f, COLOR_WHITE);
+    Renderer::drawTex(tex, glm::vec2(100, 128), glm::vec2(256, 128), 5.0f, glm::vec4(1.0f,0.2f,0.2f,1));
 }
 
 //  The callback function, 
