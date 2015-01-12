@@ -71,6 +71,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="stgbase\Scene.cpp" />
+    <ClCompile Include="stgcombat\GameWorld.cpp" />
+    <ClCompile Include="stgcombat\Battler.cpp" />
+    <ClCompile Include="stgcombat\Bullet.cpp" />
+    <ClCompile Include="stgcombat\CombatObject.cpp" />
     <ClCompile Include="stgbase\DataManager.cpp" />
     <ClCompile Include="stgbase\Renderer.cpp" />
     <ClCompile Include="stgbase\GameRunner.cpp" />
@@ -80,9 +85,19 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="stgbase\Scene.h" />
+    <ClInclude Include="stgcombat\GameWorld.h" />
+    <ClInclude Include="stgbase\IDrawable.h" />
+    <ClInclude Include="stgbase\IRemovable.h" />
+    <ClInclude Include="stgbase\ItemManager.h" />
+    <ClInclude Include="stgbase\IUpdatable.h" />
+    <ClInclude Include="stgcombat\Battler.h" />
+    <ClInclude Include="stgcombat\Bullet.h" />
+    <ClInclude Include="stgcombat\CombatObject.h" />
     <ClInclude Include="stgbase\DataManager.h" />
     <ClInclude Include="stgbase\Renderer.h" />
     <ClInclude Include="stgbase\GameRunner.h" />
+    <ClInclude Include="stgcombat\IPlayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,16 +1,32 @@
-﻿Build started 1/11/2015 6:37:26 PM.
+﻿Build started 1/13/2015 1:46:31 AM.
      1>Project "E:\Projects\shmup-opengl\shmup_opengl\shmup_opengl.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stgbase\Renderer.cpp
-         Renderer.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stgbase\Scene.cpp stgcombat\GameWorld.cpp stgcombat\Battler.cpp stgcombat\Bullet.cpp stgcombat\CombatObject.cpp stgbase\GameRunner.cpp main.cpp
+         CombatObject.cpp
+         GameWorld.cpp
+         Scene.cpp
+         Generating Code...
+         Compiling...
+         main.cpp
+         GameRunner.cpp
+     1>e:\projects\shmup-opengl\shmup_opengl\stgbase\gamerunner.cpp(83): warning C4316: 'stgcombat::CombatObject' : object allocated on the heap may not be aligned 16
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         Bullet.cpp
+         Battler.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Projects\shmup-opengl\Debug\shmup_opengl.exe" /INCREMENTAL /NOLOGO SOIL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Projects\shmup-opengl\Debug\shmup_opengl.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Projects\shmup-opengl\Debug\shmup_opengl.lib" /MACHINE:X86 Debug\DataManager.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Projects\shmup-opengl\Debug\shmup_opengl.exe" /INCREMENTAL /NOLOGO SOIL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Projects\shmup-opengl\Debug\shmup_opengl.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Projects\shmup-opengl\Debug\shmup_opengl.lib" /MACHINE:X86 Debug\Scene.obj
+         Debug\GameWorld.obj
+         Debug\Battler.obj
+         Debug\Bullet.obj
+         Debug\CombatObject.obj
+         Debug\DataManager.obj
          Debug\Renderer.obj
          Debug\GameRunner.obj
          Debug\main.obj
          SOIL.lib(SOIL.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
      1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
-     1>DataManager.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+     1>Scene.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
      1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
          Generating code
          Finished generating code
@@ -36,4 +52,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.47
+Time Elapsed 00:00:06.79

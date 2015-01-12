@@ -2,83 +2,151 @@
 // Date Created: Jan 10, 2015
 
 #include "GameRunner.h"
+#include "../stgcombat/CombatObject.h"
 #include <iostream>
 using namespace stgbase;
 
 
 //used to wrap a pointer to member function renderCallback()
-GameRunner* gameRunnerRenderCallbackObj = nullptr;
-GLuint tex;
+GameRunner* callbackGameRunnerObj = nullptr;
+
+//test
 GLuint bg;
+ItemManager<stgcombat::CombatObject> mgr;
 
 //
 //  Initialize and run the game
 //
-GameRunner::GameRunner(int argc, char** argv)
+GameRunner::GameRunner() :view_size_(1280.0f,720.0f)
 {
-    //  Create GL context
-    glutInit(&argc, argv);
+    setMaxFps(-1);
+}
+
+
+GameRunner::~GameRunner()
+{
+    if (::callbackGameRunnerObj == this)
+        ::callbackGameRunnerObj = nullptr;
+}
+
+void GameRunner::setWindowSize(int width, int height)
+{
+    this->window_width_ = width;
+    this->window_height_ = height;
+}
+
+void GameRunner::setViewSize(float width, float height)
+{
+    this->view_size_ = glm::vec2(width, height);
+}
+
+//
+//  set max frame rate
+//
+void GameRunner::setMaxFps(float max_fps)
+{
+    this->max_fps_ = max_fps;
+    if (max_fps <= 0)
+        min_idle_time_ = 0;
+    else
+        min_idle_time_ = 1000.0f / max_fps;
+}
+
+
+//
+//  That's where the game start
+//
+void GameRunner::start()
+{
+    //  Initialize GL context
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowSize(this->windowWidth_, this->windowHeight_);
-    glutInitWindowPosition(100, 100);
+    glutInitWindowSize(this->window_width_, this->window_height_);
     glutCreateWindow("卧槽");
 
-    //  Initialize 2d projection matrix
+    //  Initialize 2-D projection
     glMatrixMode(GL_PROJECTION);
-    glOrtho(0, this->windowWidth_, 0, this->windowHeight_, -1, 1);
+    //glOrtho(0, this->view_size_[0], 0, this->view_size_[1], -1, 1);  //Y-up
+    // Although I prefer to use Y-up coordinate for 2-D now, I'll just use window coordinate atm
+    glOrtho(0, this->view_size_[0], this->view_size_[1], 0, -1, 1);   //Y-down
     glMatrixMode(GL_MODELVIEW);
 
-    ::gameRunnerRenderCallbackObj = this;
-    glutDisplayFunc(gameRunnerRenderCallback);
+    ::callbackGameRunnerObj = this;
+    glutIdleFunc(gameGlutIdleCallback);
+    glutDisplayFunc(gameGlutDisplayCallback);
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    tex = DataManager::reloadTexture("res/player.png");
     bg = DataManager::reloadTexture("res/background.png");
+
+    //test start
+    mgr.add(new stgcombat::CombatObject(DataManager::getTexture("res/player.png"), glm::vec2(0, 360),
+        64, 0, 0.5f, COLOR_WHITE, 0.0f, glm::radians(90.0f), 100.0f));
+    //test end
 
     glutMainLoop();
 }
 
-GameRunner::~GameRunner()
-{
-    if (::gameRunnerRenderCallbackObj == this)
-        ::gameRunnerRenderCallbackObj = nullptr;
-}
-
 //
 //  Update game logic, called every frame
+//  elapsedTime is the time since last update() was called, in seconds
 //
 void GameRunner::update(float elapsedTime)
 {
-
+    mgr.update(elapsedTime);
 }
 
 //
 //  Draw the game scene, called every frame
+//  elapsedTime is the time since last draw() was called, in seconds
 //
 void GameRunner::draw(float elapsedTime)
 {
-    Renderer::drawTex(bg, glm::vec2(0, 0), glm::vec2(this->windowWidth_, this->windowHeight_));
-    Renderer::drawTex(tex, glm::vec2(100, 100), glm::vec2(128, 128), 0.5f, COLOR_WHITE);
-    Renderer::drawTex(tex, glm::vec2(100, 128), glm::vec2(256, 128), 5.0f, glm::vec4(1.0f,0.2f,0.2f,1));
+    Renderer::drawTex(bg, glm::vec2(0, 0), this->view_size_);
+
+    mgr.draw(elapsedTime);
 }
 
-//  The callback function, 
-void GameRunner::renderCallback()
+//
+//  The callback function for display, calls update()
+//
+void GameRunner::idleCallback()
 {
+    auto currentTime = glutGet(GLUT_ELAPSED_TIME);
+    auto elapsedTime = static_cast<float>(currentTime - this->prev_update_time_)*0.001f;
+    this->prev_update_time_ = currentTime;
 
-    //this->update();
+    this->update(elapsedTime);
 
+    //call display.
+    if (currentTime - this->prev_draw_time_ >= this->min_idle_time_)
+        glutPostRedisplay();
+}
+
+//
+//  The callback function for display, calls draw()
+//
+void GameRunner::displayCallback()
+{
+    auto currentTime = glutGet(GLUT_ELAPSED_TIME);
+    auto elapsedTime = static_cast<float>(currentTime - this->prev_draw_time_)*0.001f;
+    this->prev_draw_time_ = currentTime;
+    
     glClear(GL_COLOR_BUFFER_BIT);
 
-    this->draw(0.0f);
+    this->draw(elapsedTime);
 
 
     glutSwapBuffers();
 }
 
-void stgbase::gameRunnerRenderCallback()
+void stgbase::gameGlutDisplayCallback()
 {
-    if (::gameRunnerRenderCallbackObj != nullptr)
-        ::gameRunnerRenderCallbackObj->renderCallback();
+    if (::callbackGameRunnerObj != nullptr)
+        ::callbackGameRunnerObj->displayCallback();
+}
+
+void stgbase::gameGlutIdleCallback()
+{
+    if (::callbackGameRunnerObj != nullptr)
+        ::callbackGameRunnerObj->idleCallback();
 }
