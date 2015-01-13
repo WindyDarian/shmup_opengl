@@ -27,11 +27,11 @@ namespace stgbase{
         void setMaxFps(float max_fps); 
         void setViewSize(float width, float height);
         glm::vec2 getViewSize() { return view_size_; }
-        void start();
+        virtual void start();
 
     protected:
-        void update(float elapsedTime);
-        void draw(float elapsedTime);
+        virtual void update(float elapsedTime);
+        virtual void draw(float elapsedTime);
 
     private:
         int window_width_ = 1280;

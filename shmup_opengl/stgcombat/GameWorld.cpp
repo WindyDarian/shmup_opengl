@@ -20,6 +20,8 @@ void GameWorld::update(float elapsedTime)
     //  check between every battlers and bullets for collision.
     //  TODO: This should be optimized using methods such as a quad-tree
     //    (But not necessery for this small game prototype)
+
+    
     for (auto battler : battlers.getMemberList())
     {
         for (auto bullet : bullets.getMemberList())
@@ -33,6 +35,7 @@ void GameWorld::update(float elapsedTime)
             }
         }
     }
+    
 
     bullets.update(elapsedTime);
     battlers.update(elapsedTime);

@@ -2,17 +2,23 @@
 // Date Created: Jan 10, 2015
 
 #include "GameRunner.h"
-#include "../stgcombat/CombatObject.h"
-#include <iostream>
+#include "input_state.h"
+
+//test
+#include "ItemManager.h"
+#include "../stgcombat/GameWorld.h"
+#include "../stgbattlers/Boss.h"
+#include "../stgbattlers/Player.h"
+
 using namespace stgbase;
+
 
 
 //used to wrap a pointer to member function renderCallback()
 GameRunner* callbackGameRunnerObj = nullptr;
 
 //test
-GLuint bg;
-ItemManager<stgcombat::CombatObject> mgr;
+stgcombat::GameWorld world;
 
 //
 //  Initialize and run the game
@@ -73,15 +79,18 @@ void GameRunner::start()
     ::callbackGameRunnerObj = this;
     glutIdleFunc(gameGlutIdleCallback);
     glutDisplayFunc(gameGlutDisplayCallback);
-
+    glutKeyboardFunc(stgGlutKeyboardCallback);
+    glutKeyboardUpFunc(stgGlutKeyboardUpCallback);
+    glutMouseFunc(stgGlutMouseCallback);
+    glutSpecialFunc(stgGlutSpecialInputCallback);
+    glutSpecialUpFunc(stgGlutSpecialInputUpCallback);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    bg = DataManager::reloadTexture("res/background.png");
 
-    //test start
-    mgr.add(new stgcombat::CombatObject(DataManager::getTexture("res/player.png"), glm::vec2(0, 360),
-        64, 0, 0.5f, COLOR_WHITE, 0.0f, glm::radians(90.0f), 100.0f));
-    //test end
+    world.addBattler(new stgbattlers::Boss(glm::vec2(640, -110), 2, &world));
+    world.addBattler(new stgbattlers::Player(glm::vec2(640, 600), 1, &world));
+    world.player = std::dynamic_pointer_cast<stgcombat::IPlayer>( world.battlers.getLastAddedMember());
+    //btl.add(new stgbattlers::Enemy1(glm::vec2(500, 600), 1, &world, 0));
 
     glutMainLoop();
 }
@@ -92,7 +101,8 @@ void GameRunner::start()
 //
 void GameRunner::update(float elapsedTime)
 {
-    mgr.update(elapsedTime);
+    world.update(elapsedTime);
+    //btl.update(elapsedTime);
 }
 
 //
@@ -101,9 +111,8 @@ void GameRunner::update(float elapsedTime)
 //
 void GameRunner::draw(float elapsedTime)
 {
-    Renderer::drawTex(bg, glm::vec2(0, 0), this->view_size_);
-
-    mgr.draw(elapsedTime);
+    world.draw(elapsedTime);
+    //btl.draw(elapsedTime);
 }
 
 //
