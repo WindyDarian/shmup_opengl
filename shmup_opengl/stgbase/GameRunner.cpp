@@ -4,11 +4,6 @@
 #include "GameRunner.h"
 #include "input_state.h"
 
-//test
-#include "ItemManager.h"
-#include "../stgcombat/GameWorld.h"
-#include "../stgbattlers/Boss.h"
-#include "../stgbattlers/Player.h"
 
 using namespace stgbase;
 
@@ -17,8 +12,6 @@ using namespace stgbase;
 //used to wrap a pointer to member function renderCallback()
 GameRunner* callbackGameRunnerObj = nullptr;
 
-//test
-stgcombat::GameWorld world;
 
 //
 //  Initialize and run the game
@@ -87,12 +80,11 @@ void GameRunner::start()
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 
-    world.addBattler(new stgbattlers::Boss(glm::vec2(640, -110), 2, &world));
-    world.addBattler(new stgbattlers::Player(glm::vec2(640, 600), 1, &world));
-    world.player = std::dynamic_pointer_cast<stgcombat::IPlayer>( world.battlers.getLastAddedMember());
-    //btl.add(new stgbattlers::Enemy1(glm::vec2(500, 600), 1, &world, 0));
+
+    started();
 
     glutMainLoop();
+
 }
 
 //
@@ -101,8 +93,6 @@ void GameRunner::start()
 //
 void GameRunner::update(float elapsedTime)
 {
-    world.update(elapsedTime);
-    //btl.update(elapsedTime);
 }
 
 //
@@ -111,8 +101,6 @@ void GameRunner::update(float elapsedTime)
 //
 void GameRunner::draw(float elapsedTime)
 {
-    world.draw(elapsedTime);
-    //btl.draw(elapsedTime);
 }
 
 //

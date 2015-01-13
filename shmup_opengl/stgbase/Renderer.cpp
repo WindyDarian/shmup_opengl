@@ -15,8 +15,8 @@ void Renderer::drawTex(GLuint texture, glm::vec2& position, glm::vec2& size)
 //
 void Renderer::drawTex(GLuint texture, glm::vec2& position, glm::vec2& size, float scale, glm::vec4& color)
 {
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glColor4f(color[0], color[1], color[2], color[3]);
 
     glm::vec2 fsize = size;
@@ -104,3 +104,9 @@ void Renderer::drawTexCentered(GLuint texture, glm::vec2& position, glm::vec2& s
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
+void Renderer::drawString(std::string msg, glm::vec2& pos, glm::vec4& color)
+{
+    glRasterPos2i(pos[0], pos[1]);
+    glColor4f(color[0], color[1], color[2], color[3]);
+    glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char *)msg.c_str());
+}

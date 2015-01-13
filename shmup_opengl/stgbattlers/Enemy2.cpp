@@ -14,7 +14,7 @@ Enemy2::Enemy2(glm::vec2& position, int faction, stgcombat::GameWorld* world, fl
     faction,
     0.5f,
     COLOR_WHITE,
-    500)
+    300)
 {
     this->world_ = world;
     this->move(direction, max_speed_);

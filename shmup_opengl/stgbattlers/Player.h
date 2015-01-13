@@ -8,7 +8,7 @@
 namespace stgbattlers
 {
     //
-    //  A specific type of enemy
+    //  The player
     //
     class Player:
         public stgcombat::Battler, public stgcombat::IPlayer

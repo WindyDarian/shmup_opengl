@@ -53,7 +53,7 @@
       <AdditionalDependencies>SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)res" "$(TargetDir)res\" /s /y</Command>
+      <Command>xcopy "$(ProjectDir)res" "$(TargetDir)res\" /s /y &amp; copy "$(ProjectDir)freeglut.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -87,6 +87,9 @@
     <ClCompile Include="stgbase\Renderer.cpp" />
     <ClCompile Include="stgbase\GameRunner.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StgRunner.cpp" />
+    <ClCompile Include="stgscenes\BattleScene.cpp" />
+    <ClCompile Include="stgscenes\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stgbase\input_state.h" />
@@ -109,6 +112,9 @@
     <ClInclude Include="stgbase\Renderer.h" />
     <ClInclude Include="stgbase\GameRunner.h" />
     <ClInclude Include="stgcombat\IPlayer.h" />
+    <ClInclude Include="StgRunner.h" />
+    <ClInclude Include="stgscenes\BattleScene.h" />
+    <ClInclude Include="stgscenes\TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

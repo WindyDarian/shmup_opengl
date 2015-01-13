@@ -63,6 +63,15 @@
     <ClCompile Include="stgbattlers\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="stgscenes\BattleScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stgscenes\TitleScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StgRunner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stgbase\GameRunner.h">
@@ -123,6 +132,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stgbase\input_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stgscenes\BattleScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stgscenes\TitleScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StgRunner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

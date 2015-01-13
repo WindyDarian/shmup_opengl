@@ -28,7 +28,7 @@ namespace stgbattlers
         GLuint bullet2_tex_;
         int stance_ = 0;
         float stance_change_time_ = 5.0f;
-        float current_stance_time_ = -1.0f;
+        float current_stance_time_ = -4.0f;
         float current_direction_ = 0.0f;
     };
 }

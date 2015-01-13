@@ -30,14 +30,14 @@ bool Scene::getIsActive()
     return this->is_active;
 }
 
-void Scene::open(float elapsedTime)
+void Scene::open()
 {
     this->is_active = true;
     this->is_visible = true;
 }
 
-void Scene::close(float elapsedTime)
+void Scene::close()
 {
-    this->is_active = true;
-    this->is_visible = true;
+    this->is_active = false;
+    this->is_visible = false;
 }

@@ -18,14 +18,9 @@ GLuint loadPNG(std::string filename)
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         //SOIL_FLAG_INVERT_Y | SOIL_FLAG_MULTIPLY_ALPHA | SOIL_FLAG_COMPRESS_TO_DXT //if I am about to use Y-up coordinate
-        SOIL_FLAG_MULTIPLY_ALPHA | SOIL_FLAG_COMPRESS_TO_DXT
+         SOIL_FLAG_COMPRESS_TO_DXT
         );
     
-    //glBindTexture(GL_TEXTURE_2D, texture);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    //glBindTexture(GL_TEXTURE_2D, 0);
-
     return texture;
 }
 

@@ -14,7 +14,7 @@ Boss::Boss(glm::vec2& position, int faction, stgcombat::GameWorld* world)
     faction,
     1.0f,
     COLOR_WHITE,
-    30000)
+    15000)
 {
     this->world_ = world;
     this->move(glm::pi<float>()/2, 50.0f);

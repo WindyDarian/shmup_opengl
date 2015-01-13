@@ -28,8 +28,11 @@ namespace stgbase{
         void setViewSize(float width, float height);
         glm::vec2 getViewSize() { return view_size_; }
         virtual void start();
+        
+
 
     protected:
+        virtual void started() {};
         virtual void update(float elapsedTime);
         virtual void draw(float elapsedTime);
 

@@ -13,18 +13,19 @@ namespace stgbase{
     //  could be a game stage or a menu
     //  here I only use it as a stage though
     //
-    class Scene
+    class Scene:
+        public IUpdatable, public IDrawable, public IRemovable
     {
     public:
         Scene(GameRunner* runner);
         virtual ~Scene(){};
 
-        virtual void update(float elapsedTime) = 0;
+        virtual void update(float elapsedTime){};
         virtual void draw(float elapsedTime);
         virtual bool getIsVisible();
         virtual bool getIsActive();
-        virtual void open(float elapsedTime);
-        virtual void close(float elapsedTime);
+        virtual void open();
+        virtual void close();
         GLuint background_tex = 0;
         GameRunner* const runner;
 

@@ -5,8 +5,6 @@
 #include <glm/glm.hpp>
 #include "../stgcombat/Bullet.h"
 
-#include <iostream>
-
 namespace stgbullets{
     //
     //  The most common bullet with a constant speed
@@ -19,8 +17,6 @@ namespace stgbullets{
             int faction, float scale, glm::vec4& color, float damage,
             float direction, float speed, float lifeTime);
 
-        //for test
-        ~DirectBullet(){ std::cout << "bullet destroyed" << std::endl; }
     };
 }
 
